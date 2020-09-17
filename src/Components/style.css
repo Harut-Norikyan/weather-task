@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+.container__item{
+    width: 25%;
+    height: 600px;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 15px;
+}
+.search__block{
+    display: flex;
+}
