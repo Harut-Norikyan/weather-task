@@ -1,16 +1,211 @@
-.container{
+.container {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100vh;
 }
-.container__item{
-    width: 25%;
-    height: 600px;
-    padding-left: 10px;
+
+.container__item {
+    width: 20%;
     border: 1px solid;
-    border-radius: 15px;
 }
-.search__block{
+
+.container__item__block {
+    margin-top: -20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    height: 400px;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 10;
+}
+.container__item__block__top{
+    margin-top: -200px;
+    height: 600px;
+}
+
+.search__block {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.location{
+    color: #9e9e9e;
+    text-align: center;
+    padding-top: 20px;
+}
+.searchInput{
+    background: #e6e6e6;
+    border: none;
+    height: 25px;
+    border-radius: 3px;
+    width: 80%;
+}
+input:focus{
+    outline: none;
+}
+.searchIcon{
+    font-size: 25px;
+    cursor: pointer;
+}
+.img {
+    width: 100%;
+    height: 250px;
+}
+.cityes__block{
+    padding-left: 10px;
+}
+.cityes__block p{
+    cursor: pointer;
+}
+.error{
+    color: red;
+    font-size: 16px;
+    margin-left: 10px;
+}
+.location__block{
+    width: 100%;
+    display: flex;
+    background: transparent;
+}
+.location__block__date{
+    width: 60%;
+}
+.location__block__time{
+    color: grey;
+    font-size: 13px;
+    padding-left: 20px;
+}
+
+.location__block__city{
+    width: 40%;
+    display: flex;
+    background: #d9efff6b;
+    padding-left: 20px;
+    border-bottom-left-radius: 20px;
+    align-items: center;
+    border-top-right-radius: 20px;
+}
+.location__block__city .location__block__city__name{
+    font-size: 16px;
+    color: #76c5ff;
+    font-weight: 500;
+}
+.location__block__city .location__block__city__icon{
+    font-size: 16px;
+    color: #76c5ff;
+}
+
+
+
+
+
+.temp__block{
+    display: flex;
+    justify-content: space-around;
+}
+.sunny__block{
+    width: 25%;
+    text-align: center;
+}
+.sunny__block .sunny__icon{
+    font-size: 50px;
+    color: gray;
+}
+.sunny__block .sunny__desc{
+    text-transform: capitalize;
+    margin-top: -25px;
+    font-size: 18px;
+}
+.celsius__block{
+    width: 25%;
+    text-align: center;
+    display: flex;
+    align-items: baseline;
+}
+.celsius__block .celsius__now{
+    font-size: 50px;
+    margin: 0;
+    font-weight: 400;
+    font-family: inherit;
+}
+.celsius__block .celsius__icon{
+    font-size: 50px;
+    margin-left: -13px;
+}
+.min__max__celsius__block{
+    width: 25%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.min__max__celsius__block .max__celsius__block{
+    display: flex;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+.min__max__celsius__block .max__celsius__block .max__temp{
+    margin: 0;
+    color: grey;
+    font-size: 13px;
+    font-family: inherit;
+}
+.min__max__celsius__block .min__celsius__block{
+    display: flex;
+    justify-content: center;
+}
+.min__max__celsius__block .min__celsius__block .min__temp{
+    margin: 0;
+    color: grey;
+    font-size: 13px;
+    font-family: inherit;
+}
+.mini__celsius__icon{
+    font-size: 30px;
+    margin: 0;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -8px;
+    color: grey;
+}
+.mini__celsius__arrow__up{
+    font-size: 7px;
+    margin-left: 0;
+    color: grey;
+    margin-top: 2px;
+}
+.mini__celsius__arrow__down{
+    font-size: 7px;
+    margin-left: 0;
+    color: grey;
+    /* margin-top: 0; */
+}
+.bar__block{
+    display: flex;
+    justify-content: space-around;
+}
+.components__block{
+    width: 25%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.components__block .blocks__icon{
+    font-size: 32px;
+    color: #cac9c9;
+}
+.components__block .blocks__num{
+    font-size: 14px;
+    color: #1b1a1a;
+    font-weight: 500;
+}
+.components__block .blocks__desc{
+    font-size: 8px;
+    color: grey;
+}
+.daytime__block{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
 }

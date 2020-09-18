@@ -1,14 +1,29 @@
-import React, {Component} from 'react';
-import {IoIosSearch} from "react-icons/io";
-import axios from "axios"
+import React, { Component } from 'react';
+import { IoIosSearch } from "react-icons/io";
+import { WiCelsius } from "react-icons/wi";
+import { WiHumidity } from "react-icons/wi";
+import { WiBarometer } from "react-icons/wi";
+import { WiStrongWind } from "react-icons/wi";
+import { WiSunrise } from "react-icons/wi";
+import { WiSunset } from "react-icons/wi";
+import { GiSandsOfTime } from "react-icons/gi";
+import Day from "./Day"
 
-const Api_Key = "330216f9e3042b8a57a7865c3de67865"
+// GiSandsOfTime
+
+import axios from "axios";
+const day = require("./day-night/day.jpeg");
+const night = require("./day-night/night.jpg");
+
+const Api_Key = "330216f9e3042b8a57a7865c3de67865";
 
 class Home extends Component {
 
   state = {
     city: '',
-    cityArr: []
+    cityArr: [],
+    error: '',
+    data: null,
   }
   handleChange = (e) => {
     this.setState({
@@ -16,34 +31,70 @@ class Home extends Component {
     })
   }
   handleSubmit = async () => {
-    let {city, cityArr} = this.state
+    let { city, cityArr } = this.state;
     await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Api_Key}`)
-      .then((res) => {if (res){
-        cityArr.push(res.data.name)
-        this.setState({cityArr,city:''})
-      }})
+      .then(
+        (res) => {
+          console.log(res);
+          if (res) {
+            cityArr.unshift(res.data.name);
+            this.setState({ cityArr, city: '' });
+          };
+        },
+        (error) => {
+          if (error && city.length !== 0) {
+            this.setState({
+              error: "error"
+            });
+          };
+        });
+  };
+
+  getWeatherFromCity = async (city) => {
+    await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Api_Key}&units=metric`)
+      .then(
+        (res) => {
+          if (res) {
+            this.setState({
+              data: res.data
+            })
+          }
+        });
   }
 
   render() {
-    let {city, cityArr} = this.state
+    let { city, cityArr, error, data } = this.state;
     return (
       <div>
         <div className="container">
-          <div className="container__item">hello</div>
-          <div className="container__item">my</div>
+
+          {data !== null ? <Day data={this.state.data} /> : null}
+
+
           <div className="container__item">
-            <div className="search__block">
-              <input type="text" placeholder="Enter the name of the city !"
-                     name="city"
-                     value={city}
-                     onChange={this.handleChange}
-              />
-              <button onClick={this.handleSubmit}><span><IoIosSearch/></span></button>
+            <img className="img" src={day} />
+            <div className="container__item__block container__item__block__top">
+              <p className="location">Location</p>
+
+              <div className="search__block">
+                <input type="text"
+                  name="city"
+                  value={city}
+                  onChange={this.handleChange}
+                  onFocus={() => this.setState({ error: '' })}
+                  className="searchInput"
+                />
+                <span className="searchIcon" onClick={this.handleSubmit}><IoIosSearch /></span>
+              </div>
+              <div className="error">{error}</div>
+              {cityArr.length ? cityArr.map((m, index) =>
+                <div
+                  key={index}
+                  className="cityes__block"
+                >
+                  <p onClick={() => this.getWeatherFromCity(m)}>{m}</p>
+                </div>) : null}
             </div>
-            {cityArr.length ? cityArr.map(m =>
-              <div>
-                <span>{m}</span>
-              </div>) : null}
           </div>
         </div>
       </div>
