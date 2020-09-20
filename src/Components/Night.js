@@ -13,10 +13,11 @@ import {IoMdArrowDown} from "react-icons/io";
 import {MdLocationOn} from "react-icons/md";
 import {connect} from 'react-redux';
 import {getWeather} from "../store/actions/weather";
+const night = require("./day-night/night.jpg");
 
 const day = require("./day-night/day.jpeg");
 
-class Day extends Component {
+class Night extends Component {
   static propTypes = {};
 
   getDateFunc = () => {
@@ -50,7 +51,7 @@ class Day extends Component {
       <>
         {this.props.data !== null ?
           <div className="container__item">
-            <img className="img" src={day}/>
+            <img className="img" src={night}/>
             <div className="container__item__block">
               <div className="location__block">
 
@@ -161,7 +162,7 @@ const mapDispatchToProps = {};
 const Container = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Day);
+)(Night);
 
 export default Container;
 
