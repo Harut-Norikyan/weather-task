@@ -12,9 +12,11 @@ import {IoMdArrowUp} from "react-icons/io";
 import {IoMdArrowDown} from "react-icons/io";
 import {MdLocationOn} from "react-icons/md";
 import {connect} from 'react-redux';
-import {getWeather} from "../store/actions/weather";
+import MiniWeatherBlock from "./MiniWeatherBlock";
 
-const day = require("./day-night/day.jpeg");
+const dayImg = require("./day-night/day.jpeg");
+let weekDay = null;
+let day = null;
 
 class Day extends Component {
   static propTypes = {};
@@ -30,27 +32,31 @@ class Day extends Component {
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
     const monthNames = [" Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let weekDay = weekday[d.getDay()]
+    weekDay = weekday[d.getDay()]
 
-    let day = '' + d.getDate();
+    day = '' + d.getDate();
     let year = d.getFullYear();
-    if (day.length < 2)
-      day = '0' + day;
-    let month = monthNames[d.getMonth()]
+    if (day.length < 2) day = '0' + day;
+
+    let month = monthNames[d.getMonth()];
+
     let hours = d.getHours();
+
     let min = d.getMinutes();
-    if (min < 10)
-      min = '0' + min;
-    return <p
-      className="location__block__time">{weekDay + "," + day + " " + month + " " + year + " | " + hours + ":" + min}PM</p>
-  }
+    if (min < 10) min = '0' + min;
+
+    return (
+      <p className="location__block__time">
+        {weekDay + "," + day + " " + month + " " + year + " | " + hours + ":" + min}PM
+      </p>)
+  };
 
   render() {
     return (
       <>
         {this.props.data !== null ?
           <div className="container__item">
-            <img className="img" src={day}/>
+            <img className="img" src={dayImg} alt="dayImg"/>
             <div className="container__item__block">
               <div className="location__block">
 
@@ -80,13 +86,11 @@ class Day extends Component {
 
                 <div className="min__max__celsius__block">
                   <div className="max__celsius__block">
-                    {/* <p>{this.props.data?.main.temp__max - 273.15}</p> */}
                     <p className="max__temp">{Math.floor(this.props.data?.main.temp_max)}</p>
                     <p className="mini__celsius__icon"><WiCelsius/></p>
                     <p className="mini__celsius__arrow__up"><IoMdArrowUp/></p>
                   </div>
                   <div className="min__celsius__block">
-                    {/* <p>{this.props.data?.main.temp__min - 273.15}</p> */}
                     <p className="min__temp">{Math.floor(this.props.data?.main.temp_min)}</p>
                     <p className="mini__celsius__icon"><WiCelsius/></p>
                     <p className="mini__celsius__arrow__down"><IoMdArrowDown/></p>
@@ -97,21 +101,18 @@ class Day extends Component {
               <div className="bar__block">
                 <div className="components__block">
                   <div className="blocks__icon"><WiHumidity/></div>
-                  {/* <div className='blocks__num'>49%</div> */}
                   <div className='blocks__num'>{this.props.data?.main.humidity}%</div>
                   <div className='blocks__desc'>Humidity</div>
                 </div>
 
                 <div className="components__block">
                   <div className="blocks__icon"><GiSpeedometer/></div>
-                  {/* <div className='blocks__num'>1.007mBar?</div> */}
                   <div className='blocks__num'>{this.props.data?.main.pressure} mBar</div>
                   <div className='blocks__desc'>Pressure</div>
                 </div>
 
                 <div className="components__block">
                   <div className="blocks__icon"><WiStrongWind/></div>
-                  {/* <div className='blocks__num'>23km/h</div> */}
                   <div className='blocks__num'>{(this.props.data?.wind.speed * 3.6).toFixed(1)} km/h</div>
                   <div className='blocks__desc'>Wind</div>
                 </div>
@@ -119,7 +120,6 @@ class Day extends Component {
               <div className="daytime__block">
                 <div className="components__block">
                   <div className="blocks__icon"><WiSunrise/></div>
-                  {/* <div className='blocks__num'>6:03AM?</div> */}
                   <div className='blocks__num'>
                     {new Date(this.props.data?.sys.sunrise * 1000).getHours()}:
                     {(new Date(this.props.data?.sys.sunrise * 1000).getMinutes()) < 10 ? "0" + (new Date(this.props.data?.sys.sunrise * 1000).getMinutes()) : (new Date(this.props.data?.sys.sunrise * 1000).getMinutes())} AM
@@ -129,7 +129,6 @@ class Day extends Component {
 
                 <div className="components__block">
                   <div className="blocks__icon"><WiSunset/></div>
-                  {/* <div className='blocks__num'>7:05 PM?</div> */}
                   <div className='blocks__num'>
                     {new Date(this.props.data?.sys.sunset * 1000).getHours()}:
                     {(new Date(this.props.data?.sys.sunset * 1000).getMinutes()) < 10 ? "0" + (new Date(this.props.data?.sys.sunset * 1000).getMinutes()) : (new Date(this.props.data?.sys.sunset * 1000).getMinutes())} PM
@@ -143,8 +142,14 @@ class Day extends Component {
                   <div className='blocks__desc'>Daytime</div>
                 </div>
               </div>
+              <div className="horizontal__scroll__block scrollbar" id="style-3">
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+              </div>
             </div>
-
           </div>
           : null}
       </>

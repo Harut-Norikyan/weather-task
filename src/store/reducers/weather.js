@@ -14,7 +14,10 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_WEATHER_REQUEST:
-      return {...state,};
+      return {
+        ...state,
+        message : "request"
+      };
     case GET_WEATHER_SUCCESS:
       const city = action.payload.data.name;
       initialState.cityArr.push([city,Math.floor(action.payload.data.main.temp)]);
@@ -26,7 +29,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         data: action.payload.data,
         cityArr: [...initialState.cityArr],
-        message : "success"
       };
     case GET_WEATHER_FAIL:
       return {

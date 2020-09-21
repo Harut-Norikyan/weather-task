@@ -12,10 +12,12 @@ import {IoMdArrowUp} from "react-icons/io";
 import {IoMdArrowDown} from "react-icons/io";
 import {MdLocationOn} from "react-icons/md";
 import {connect} from 'react-redux';
-import {getWeather} from "../store/actions/weather";
-const night = require("./day-night/night.jpg");
+// import {getWeather} from "../store/actions/weather";
+import MiniWeatherBlock from "./MiniWeatherBlock";
 
-const day = require("./day-night/day.jpeg");
+const night = require("./day-night/night.jpg");
+let weekDay = null;
+let day = null;
 
 class Night extends Component {
   static propTypes = {};
@@ -31,9 +33,9 @@ class Night extends Component {
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
     const monthNames = [" Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let weekDay = weekday[d.getDay()]
+     weekDay = weekday[d.getDay()]
 
-    let day = '' + d.getDate();
+     day = '' + d.getDate();
     let year = d.getFullYear();
     if (day.length < 2)
       day = '0' + day;
@@ -51,7 +53,7 @@ class Night extends Component {
       <>
         {this.props.data !== null ?
           <div className="container__item">
-            <img className="img" src={night}/>
+            <img className="img" src={night} alt="night"/>
             <div className="container__item__block">
               <div className="location__block">
 
@@ -144,8 +146,14 @@ class Night extends Component {
                   <div className='blocks__desc'>Daytime</div>
                 </div>
               </div>
+              <div className="horizontal__scroll__block scrollbar" id="style-3">
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+                <MiniWeatherBlock data={this.props.data} weekDay={weekDay} day={day}/>
+              </div>
             </div>
-
           </div>
           : null}
       </>
