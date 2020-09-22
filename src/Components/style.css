@@ -72,15 +72,6 @@ input:focus {
     height: 250px;
 }
 
-.cityes__block {
-    /* transition: 0.3s; */
-}
-
-.cityes__block :hover {
-    /* background-color: #ECF7FD; */
-    /* transition: 0.3; */
-}
-
 .cityes__block .cityes__by__home {
     width: 82%;
     border-radius: 3px;
@@ -335,7 +326,6 @@ input:focus {
 }
 
 #style-3::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(224, 221, 221, 0.3);
     overflow: hidden;
 }
 
@@ -407,4 +397,23 @@ input:focus {
 .mini__celsius__block div .mini__arrow {
     font-size: 8px;
     color: #999999;
+}
+.day__component{
+    position: absolute;
+    z-index: 1000;
+}
+.back__icon{
+    position: absolute;
+    font-size:25px;
+    cursor: pointer;
+    left: 10px;
+    top: 3px;
+    color: #4a4646;
+    transition: 0.3s;
+}
+.back__icon:hover{
+    color: #000000;
+    transition: 0.3s;
+    font-size: 33px;
+    position: absolute;
 }

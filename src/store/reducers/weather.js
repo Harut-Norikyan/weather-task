@@ -8,7 +8,7 @@ import {
 const initialState = {
   data: [],
   cityArr: [],
-  message: ''
+  message: '',
 };
 
 export default function reducer(state = initialState, action) {
@@ -16,15 +16,12 @@ export default function reducer(state = initialState, action) {
     case GET_WEATHER_REQUEST:
       return {
         ...state,
-        message : "request"
+        message : "request",
       };
     case GET_WEATHER_SUCCESS:
       const city = action.payload.data.name;
       initialState.cityArr.push([city,Math.floor(action.payload.data.main.temp)]);
-      // initialState.cityArr = [...new Set(initialState.cityArr)].sort();
-      initialState.cityArr = [...new Map(initialState.cityArr.map(item => [item[0], item])).values()].sort()
-
-      console.log(initialState.cityArr)
+      initialState.cityArr = [...new Map(initialState.cityArr.map(item => [item[0], item])).values()].sort();
       return {
         ...state,
         data: action.payload.data,
@@ -33,20 +30,18 @@ export default function reducer(state = initialState, action) {
     case GET_WEATHER_FAIL:
       return {
         ...state,
-        message: "What city doesn't exist"
+        message: "What city doesn't exist",
       };
-
     case REMOVE_CITY:
-      const {cityName} = action.payload
+      const {cityName} = action.payload;
       let index = initialState.cityArr.indexOf(cityName);
       initialState.cityArr.splice(index, 1);
       return {
         ...state,
         cityArr: [...initialState.cityArr],
-        data: null
+        data: null,
       };
-
     default:
       return state;
-  }
-}
+  };
+};

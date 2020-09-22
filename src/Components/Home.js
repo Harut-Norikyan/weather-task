@@ -1,60 +1,51 @@
 import React, {Component} from 'react';
 import {IoIosSearch} from "react-icons/io";
-// import {RiDeleteBin2Line} from "react-icons/ri";
 import {connect} from 'react-redux';
 import {getWeather, removeCity} from "../store/actions/weather";
-import Day from "./Day";
-import Night from "./Night";
+import DayNight from "./DayNight";
 import {WiCelsius} from "react-icons/wi";
 import {RiDeleteBin2Line} from "react-icons/ri";
 
-const day = require("./day-night/day.jpeg");
+const dayImg = require("./day-night/day.jpeg");
 
 class Home extends Component {
   static propTypes = {};
 
   state = {
     city: '',
-    components: false,
-  }
+    component: false,
+  };
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   handleSubmit = (city) => {
-    this.setState({city: ''})
-    this.props.getWeather(city)
-  }
+    this.setState({city: ''});
+    this.props.getWeather(city);
+  };
 
   closeBlock = () => {
-    this.setState({components: false})
-  }
+    this.setState({component: false});
+  };
 
   getWeatherFromCity = async (city) => {
     await this.props.getWeather(city);
-    await this.setState({components: true})
-  }
+    await this.setState({component: true});
+  };
 
   render() {
-    console.log(this.props.state, "this.props.state")
-    let {city, components} = this.state;
+    let {city, component} = this.state;
     return (
       <div>
         <div className="container">
           <div className="container__item">
-            {components ? <Day data={this.props.data} closeBlock={this.closeBlock}/> : null}
-          </div>
-          <div className="container__item">
-            {components ? <Night data={this.props.data} closeBlock={this.closeBlock}/> : null}
-          </div>
-          <div className="container__item">
-            <img className="img" src={day} alt="day"/>
+          {component ? <DayNight data={this.props.data} closeBlock={this.closeBlock}/> : null}
+            <img className="img" src={dayImg} alt="day"/>
             <div className="container__item__block container__item__block__top">
               <p className="location">Location</p>
-
               <div className="search__block">
                 <input type="text"
                        name="city"
@@ -62,7 +53,6 @@ class Home extends Component {
                        onChange={this.handleChange}
                        className="searchInput"
                 />
-                {/*<span className="searchIcon" onClick={this.getWeather}><IoIosSearch /></span>*/}
                 <span className="searchIcon" onClick={() => this.handleSubmit(city)}><IoIosSearch/></span>
               </div>
               <div className="error">
@@ -85,7 +75,6 @@ class Home extends Component {
                         </p>
                       </div>
                     </div>
-
                   </div>) : null}
               </div>
             </div>
@@ -100,13 +89,12 @@ const mapStateToProps = (state) => ({
   state: state,
   data: state?.weather?.data,
   cityArr: state?.weather?.cityArr,
-  error: state.weather.message
+  error: state.weather.message,
 });
 
 const mapDispatchToProps = {
   getWeather,
-  removeCity
-
+  removeCity,
 };
 
 const Container = connect(

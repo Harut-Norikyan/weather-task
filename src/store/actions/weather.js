@@ -7,7 +7,7 @@ export function getWeather(city) {
     type: GET_WEATHER_REQUEST,
     payload: {city},
   };
-}
+};
 
 export const REMOVE_CITY = "REMOVE_CITY";
 export function removeCity(cityName) {
@@ -15,4 +15,4 @@ export function removeCity(cityName) {
     type: REMOVE_CITY,
     payload: {cityName},
   };
-}
+};
